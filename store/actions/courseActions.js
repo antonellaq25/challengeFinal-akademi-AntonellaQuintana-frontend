@@ -77,14 +77,11 @@ export const createCourse = (courseData) => async (dispatch, getState) => {
     try {
         dispatch({ type: CREATE_COURSE_REQUEST });
 
-        const {
-            auth: { user },
-        } = getState();
+
+        const { auth: { token } } = getState();
 
         const config = {
-            headers: {
-                Authorization: `Bearer ${user.token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
         };
 
         const { data } = await axios.post("http://localhost:3000/courses", courseData, config);
@@ -102,12 +99,10 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type: DELETE_COURSE_REQUEST });
 
-        const {
-            auth: { user },
-        } = getState();
+        const { auth: { token } } = getState();
 
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` },
+            headers: { Authorization: `Bearer ${token}` },
         };
 
         await axios.delete(`http://localhost:3000/courses/${id}`, config);
@@ -125,12 +120,10 @@ export const updateCourse = (id, updatedData) => async (dispatch, getState) => {
     try {
         dispatch({ type: UPDATE_COURSE_REQUEST });
 
-        const {
-            auth: { user },
-        } = getState();
+        const { auth: { token } } = getState();
 
         const config = {
-            headers: { Authorization: `Bearer ${user.token}` },
+            headers: { Authorization: `Bearer ${token}` },
         };
 
         const { data } = await axios.put(`http://localhost:3000/courses/${id}`, updatedData, config);
@@ -143,6 +136,7 @@ export const updateCourse = (id, updatedData) => async (dispatch, getState) => {
         });
     }
 };
+
 
 export const getCourseDetail = (id) => async (dispatch, getState) => {
     try {

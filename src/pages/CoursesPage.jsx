@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyCourses } from "../../store/actions/courseActions";
+import { getMyCourses, deleteCourse } from "../../store/actions/courseActions";
 import {
   Card,
   CardBody,
@@ -16,47 +16,89 @@ const CoursesPage = () => {
   const navigate = useNavigate();
 
   const { loading, error, courses } = useSelector((state) => state.course);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getMyCourses());
-  }, [dispatch]);
+    if (user?.role === "teacher") {
+      dispatch(getMyCourses());
+    } else {
+     
+    }
+  }, [dispatch, user]);
 
-  const handleDetail = (id) => {
-    navigate(`/courses/${id}`);
+  const handleCreate = () => {
+    navigate("/courses/create");
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/courses/${id}/edit`);
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("¿Estás seguro que quieres borrar este curso?");
+    if (confirmDelete) {
+      dispatch(deleteCourse(id));
+    }
   };
 
   return (
     <>
       <AppNavbar />
-      <div className="flex justify-center items-start min-h-screen bg-green-50 px-4 pt-10">
+      <div className="flex flex-col items-center min-h-screen bg-green-50 px-4 pt-10">
+        {user?.role === "teacher" && (
+          <div className="w-full max-w-4xl mb-6 flex justify-end">
+            <Button color="green" onClick={handleCreate}>
+              Crear Nuevo Curso
+            </Button>
+          </div>
+        )}
+
         <Card className="w-full max-w-4xl">
           <CardBody>
             <Typography variant="h4" color="blue-gray" className="mb-4 text-center">
               Mis Cursos
             </Typography>
+
             {loading && <Spinner className="mx-auto" />}
+
             {error && (
               <Typography color="red" className="text-center">
                 {error}
               </Typography>
             )}
+
             {!loading && !error && (
               <ul className="space-y-4">
                 {courses?.length > 0 ? (
                   courses.map((course) => (
-                    <li key={course._id} className="border p-4 rounded bg-white">
-                      <Typography variant="h6">{course.title}</Typography>
-                      <Typography variant="small" color="gray">
-                        {course.description}
-                      </Typography>
-                      <Button
-                        onClick={() => handleDetail(course._id)}
-                        size="sm"
-                        color="blue"
-                        className="mt-2"
-                      >
-                        Ver Detalle
-                      </Button>
+                    <li
+                      key={course._id}
+                      className="border p-4 rounded bg-white flex flex-col md:flex-row md:items-center md:justify-between"
+                    >
+                      <div>
+                        <Typography variant="h6">{course.title}</Typography>
+                        <Typography variant="small" color="gray">
+                          {course.description}
+                        </Typography>
+                      </div>
+
+                      <div className="mt-4 md:mt-0 space-x-2 flex">
+                        <Button
+                          size="sm"
+                          color="amber"
+                          onClick={() => handleEdit(course._id)}
+                        >
+                          Editar
+                        </Button>
+
+                        <Button
+                          size="sm"
+                          color="red"
+                          onClick={() => handleDelete(course._id)}
+                        >
+                          Borrar
+                        </Button>
+                      </div>
                     </li>
                   ))
                 ) : (

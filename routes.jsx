@@ -11,7 +11,8 @@ import NewUserPage from "./src/pages/NewUserPage"
 import CourseDetailPage from "./src/pages/CourseDetailPage";
 import CourseList from "./src/pages/CourseList";
 import TeacherGradesPage from "./src/pages/TeacherGradesPage";
-
+import CreateCoursePage from "./src/pages/CreateCoursePage";
+import EditCoursePage from "./src/pages/EditCoursePage";
 export default function AppRoutes({ user }) {
     console.log("usuarioactual", user)
     return (
@@ -52,7 +53,15 @@ export default function AppRoutes({ user }) {
                     </ProtectedRoute>
                 }
             />
-
+            <Route path="/courses/create"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["teacher"]}>
+                        <CreateCoursePage />
+                    </ProtectedRoute>} />
+            <Route path="/courses/:id/edit"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["teacher"]}><EditCoursePage />
+                    </ProtectedRoute>} />
 
             <Route path="/courses/:id" element={<CourseDetailPage />} />
             <Route

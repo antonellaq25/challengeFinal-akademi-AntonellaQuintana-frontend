@@ -34,9 +34,9 @@ const NewUserPage = () => {
   };
 
   const fields = [
-    { name: "name", label: "Nombre", type: "text" },
+    { name: "name", label: "Name", type: "text" },
     { name: "email", label: "Email", type: "email" },
-    { name: "password", label: "Contraseña", type: "password", minLength: 6 },
+    { name: "password", label: "Password", type: "password", minLength: 6 },
   ];
 
   return (
@@ -67,7 +67,7 @@ const NewUserPage = () => {
             </Select>
 
             <Button type="submit" disabled={loading}>
-              {loading ? "Creando..." : "Crear Usuario"}
+              {loading ? "Creating..." : "New user"}
             </Button>
 
             {error && (

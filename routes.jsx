@@ -10,6 +10,7 @@ import AdminDashboardPage from "./src/pages/AdminDashboardPage";
 import NewUserPage from "./src/pages/NewUserPage"
 import CourseDetailPage from "./src/pages/CourseDetailPage";
 import CourseList from "./src/pages/CourseList";
+import TeacherGradesPage from "./src/pages/TeacherGradesPage";
 
 export default function AppRoutes({ user }) {
     console.log("usuarioactual", user)
@@ -20,7 +21,7 @@ export default function AppRoutes({ user }) {
                 path="/courses"
                 element={
                     <ProtectedRoute user={user} allowedRoles={["student", "superadmin"]}>
-                        <CourseList user={user}  />
+                        <CourseList user={user} />
                     </ProtectedRoute>
                 }
             />
@@ -36,13 +37,22 @@ export default function AppRoutes({ user }) {
                 }
             />
             <Route
-                path="/dashboard"
+                path="/teacher/courses"
                 element={
                     <ProtectedRoute user={user} allowedRoles={["teacher"]}>
                         <TeacherPage />
                     </ProtectedRoute>
                 }
             />
+            <Route
+                path="/teacher/grades"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["teacher"]}>
+                        <TeacherGradesPage />
+                    </ProtectedRoute>
+                }
+            />
+
 
             <Route path="/courses/:id" element={<CourseDetailPage />} />
             <Route

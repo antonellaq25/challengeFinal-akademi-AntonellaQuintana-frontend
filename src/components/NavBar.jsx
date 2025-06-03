@@ -20,8 +20,7 @@ const NavbarPanel = ({ role }) => {
       { label: "Courses", to: "/courses" },
     ],
     teacher: [
-      { label: "Dashboard", to: "/dashboard" },
-      { label: "My courses", to: "/teacher/my-courses" },
+      { label: "Courses", to: "/teacher/courses" },
       { label: "Grades", to: "/teacher/grades" },
     ],
     student: [

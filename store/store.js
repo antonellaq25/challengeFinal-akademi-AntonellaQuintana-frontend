@@ -4,6 +4,7 @@ import { authReducer } from "./reducers/authReducer";
 import { courseReducer, courseDetailReducer } from "./reducers/courseReducer";
 import { userReducer } from "./reducers/userReducer";
 import { enrollmentReducer } from "./reducers/enrollmentReducer";
+import { gradeReducer } from './reducers/gradeReducer';
 
 
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     users: userReducer,
     enrollmentList: enrollmentReducer,
     courseDetail: courseDetailReducer,
+    grade: gradeReducer,
 });
 
 const store = createStore(

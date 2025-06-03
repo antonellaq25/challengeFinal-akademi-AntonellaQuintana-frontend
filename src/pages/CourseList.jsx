@@ -53,7 +53,7 @@ const CourseList = ({ user }) => {
                   color="blue"
                   className="mt-2"
                 >
-                  Ver Detalle
+                  See more
                 </Button>
                 {user?.role === "student" && (
                   <Button

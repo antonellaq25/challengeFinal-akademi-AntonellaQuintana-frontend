@@ -17,7 +17,7 @@ const EditCoursePage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const { loading, error, courseDetail } = useSelector((state) => state.course);
+const { loading, error, course } = useSelector((state) => state.courseDetail);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -30,14 +30,15 @@ const EditCoursePage = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (courseDetail) {
-      setTitle(courseDetail.title || "");
-      setDescription(courseDetail.description || "");
-      setCategory(courseDetail.category || "");
-      setPrice(courseDetail.price || "");
-      setActive(courseDetail.active ?? true);
-    }
-  }, [courseDetail]);
+  if (course) {
+    setTitle(course.title || "");
+    setDescription(course.description || "");
+    setCategory(course.category || "");
+    setPrice(course.price || "");
+    setActive(course.active ?? true);
+  }
+}, [course]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -55,7 +56,7 @@ const EditCoursePage = () => {
     });
   };
 
-  if (loading && !courseDetail) {
+  if (loading || !course) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <Spinner />

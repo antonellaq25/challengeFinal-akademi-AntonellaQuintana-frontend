@@ -13,6 +13,7 @@ import CourseList from "./src/pages/CourseList";
 import TeacherGradesPage from "./src/pages/TeacherGradesPage";
 import CreateCoursePage from "./src/pages/CreateCoursePage";
 import EditCoursePage from "./src/pages/EditCoursePage";
+
 export default function AppRoutes({ user }) {
     console.log("usuarioactual", user)
     return (

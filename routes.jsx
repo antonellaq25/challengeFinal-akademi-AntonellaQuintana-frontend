@@ -1,0 +1,69 @@
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+import ProtectedRoute from "./src/components/ProtectedRoutes";
+import Register from "./src/pages/Register"
+import Login from "./src/pages/Login"
+import CoursesPage from "./src/pages/CoursesPage";
+import TeacherPage from "./src/pages/TeacherPage";
+import AdminDashboardPage from "./src/pages/AdminDashboardPage";
+import NewUserPage from "./src/pages/NewUserPage"
+import CourseDetailPage from "./src/pages/CourseDetailPage";
+import CourseList from "./src/pages/CourseList";
+
+export default function AppRoutes({ user }) {
+    console.log("usuarioactual", user)
+    return (
+        <Routes>
+
+            <Route
+                path="/courses"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["student", "superadmin"]}>
+                        <CourseList user={user}  />
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route
+                path="/student/my-courses"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["student"]}>
+                        <CoursesPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/dashboard"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["teacher"]}>
+                        <TeacherPage />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route path="/courses/:id" element={<CourseDetailPage />} />
+            <Route
+                path="/admin"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["superadmin"]}>
+                        <AdminDashboardPage />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/admin/new-user"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["superadmin"]}>
+                        <NewUserPage />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route path="*" element={<h1>404 - Page not found</h1>} />
+        </Routes>
+    );
+}

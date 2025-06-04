@@ -16,6 +16,7 @@ import {
     GET_COURSE_DETAIL_SUCCESS,
     GET_COURSE_DETAIL_FAILURE,
 } from "../types/courseTypes";
+const API_URL = "http://localhost:3000";
 
 export const getCourses = () => async (dispatch, getState) => {
     try {
@@ -31,7 +32,7 @@ export const getCourses = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get("http://localhost:3000/courses", config);
+        const { data } = await axios.get(`${API_URL}/courses`, config);
         console.log("Cursos recibidos:", data);
 
         dispatch({
@@ -47,7 +48,6 @@ export const getCourses = () => async (dispatch, getState) => {
     }
 };
 
-
 export const getMyCourses = () => async (dispatch, getState) => {
     try {
         dispatch({ type: GET_COURSES_REQUEST });
@@ -62,7 +62,7 @@ export const getMyCourses = () => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.get("http://localhost:3000/courses/my-courses", config);
+        const { data } = await axios.get(`${API_URL}/courses/my-courses`, config);
 
         dispatch({ type: GET_COURSES_SUCCESS, payload: data });
     } catch (error) {
@@ -84,7 +84,7 @@ export const createCourse = (courseData) => async (dispatch, getState) => {
             headers: { Authorization: `Bearer ${token}` },
         };
 
-        const { data } = await axios.post("http://localhost:3000/courses", courseData, config);
+        const { data } = await axios.post(`${API_URL}/courses`, courseData, config);
 
         dispatch({ type: CREATE_COURSE_SUCCESS, payload: data });
     } catch (error) {
@@ -105,7 +105,7 @@ export const deleteCourse = (id) => async (dispatch, getState) => {
             headers: { Authorization: `Bearer ${token}` },
         };
 
-        await axios.delete(`http://localhost:3000/courses/${id}`, config);
+        await axios.delete(`${API_URL}/courses/${id}`, config);
 
         dispatch({ type: DELETE_COURSE_SUCCESS, payload: id });
     } catch (error) {
@@ -126,7 +126,7 @@ export const updateCourse = (id, updatedData) => async (dispatch, getState) => {
             headers: { Authorization: `Bearer ${token}` },
         };
 
-        const { data } = await axios.put(`http://localhost:3000/courses/${id}`, updatedData, config);
+        const { data } = await axios.put(`${API_URL}/courses/${id}`, updatedData, config);
 
         dispatch({ type: UPDATE_COURSE_SUCCESS, payload: data });
     } catch (error) {
@@ -136,7 +136,6 @@ export const updateCourse = (id, updatedData) => async (dispatch, getState) => {
         });
     }
 };
-
 
 export const getCourseDetail = (id) => async (dispatch, getState) => {
     try {
@@ -150,7 +149,7 @@ export const getCourseDetail = (id) => async (dispatch, getState) => {
             headers: { Authorization: `Bearer ${token}` },
         };
 
-        const { data } = await axios.get(`http://localhost:3000/courses/${id}`, config);
+        const { data } = await axios.get(`${API_URL}/courses/${id}`, config);
 
         dispatch({ type: GET_COURSE_DETAIL_SUCCESS, payload: data });
     } catch (error) {

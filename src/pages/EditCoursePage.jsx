@@ -1,59 +1,55 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourseDetail, updateCourse } from "../../store/actions/courseActions";
 import { useNavigate, useParams } from "react-router-dom";
+import { getCourseDetail, updateCourse } from "../../store/actions/courseActions";
 import {
-  Card,
-  CardBody,
-  Typography,
-  Input,
-  Button,
-  Textarea,
-  Spinner,
+  Card, CardBody, Typography, Input, Button, Textarea, Spinner
 } from "@material-tailwind/react";
+
+const initialFormState = {
+  title: "",
+  description: "",
+  category: "",
+  price: "",
+  active: true,
+};
 
 const EditCoursePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-const { loading, error, course } = useSelector((state) => state.courseDetail);
+  const { loading, error, course } = useSelector((state) => state.courseDetail);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState("");
-  const [active, setActive] = useState(true);
+  const [form, setForm] = useState(initialFormState);
 
   useEffect(() => {
     dispatch(getCourseDetail(id));
   }, [dispatch, id]);
 
   useEffect(() => {
-  if (course) {
-    setTitle(course.title || "");
-    setDescription(course.description || "");
-    setCategory(course.category || "");
-    setPrice(course.price || "");
-    setActive(course.active ?? true);
-  }
-}, [course]);
+    if (course) {
+      setForm({
+        title: course.title || "",
+        description: course.description || "",
+        category: course.category || "",
+        price: course.price || "",
+        active: course.active ?? true,
+      });
+    }
+  }, [course]);
 
+  const handleChange = ({ target: { name, value, type, checked } }) => {
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const updatedCourse = {
-      title,
-      description,
-      category,
-      price: Number(price),
-      active,
-    };
-
-    dispatch(updateCourse(id, updatedCourse)).then(() => {
-      navigate("/teacher/courses");
-    });
+    dispatch(updateCourse(id, { ...form, price: Number(form.price) }))
+      .then(() => navigate("/teacher/courses"));
   };
 
   if (loading || !course) {
@@ -64,55 +60,60 @@ const { loading, error, course } = useSelector((state) => state.courseDetail);
     );
   }
 
+  const formFields = [
+    { label: "Title", name: "title" },
+    { label: "Description", name: "description", isTextarea: true },
+    { label: "Category", name: "category" },
+    { label: "Price", name: "price", type: "number" },
+  ];
+
   return (
-    <div className="flex justify-center items-start min-h-screen bg-green-50 px-4 pt-10">
+    <div className="flex justify-center items-start min-h-screen bg-gray-100 px-4 pt-10">
       <Card className="w-full max-w-lg">
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="mb-6 text-center">
-            Editar Curso
+            Edit Course
           </Typography>
 
           {error && <Typography color="red">{error}</Typography>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              label="Título"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <Textarea
-              label="Descripción"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-            />
-            <Input
-              label="Categoría"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              required
-            />
-            <Input
-              label="Precio"
-              type="number"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-              required
-            />
+            {formFields.map(({ label, name, type = "text", isTextarea }) =>
+              isTextarea ? (
+                <Textarea
+                  key={name}
+                  label={label}
+                  name={name}
+                  value={form[name]}
+                  onChange={handleChange}
+                  required
+                />
+              ) : (
+                <Input
+                  key={name}
+                  label={label}
+                  name={name}
+                  type={type}
+                  value={form[name]}
+                  onChange={handleChange}
+                  required
+                />
+              )
+            )}
 
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                checked={active}
-                onChange={() => setActive(!active)}
+                name="active"
+                checked={form.active}
+                onChange={handleChange}
                 id="active-checkbox"
               />
-              <label htmlFor="active-checkbox">Activo</label>
+              <label htmlFor="active-checkbox">Active</label>
             </div>
 
             <Button type="submit" color="amber" disabled={loading}>
-              {loading ? "Actualizando..." : "Actualizar Curso"}
+              {loading ? "Updating..." : "Update Course"}
             </Button>
           </form>
         </CardBody>

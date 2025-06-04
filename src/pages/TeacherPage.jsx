@@ -36,8 +36,7 @@ const TeacherPage = () => {
     <>
       <NavbarPanel role={user?.role} />
 
-      <section className="min-h-screen bg-green-50 px-4 py-10 flex flex-col items-center">
-        {/* Botón Crear Curso visible solo para teacher */}
+      <section className="min-h-screen bg-gray-100 px-4 py-10 flex flex-col items-center">
         {user?.role === "teacher" && (
           <div className="w-full max-w-5xl mb-6 flex justify-end">
             <Button color="green" onClick={handleCreate}>

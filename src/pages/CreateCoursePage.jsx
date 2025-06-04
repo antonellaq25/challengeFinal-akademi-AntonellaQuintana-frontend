@@ -46,7 +46,7 @@ const CreateCoursePage = () => {
     };
 
     dispatch(createCourse(newCourse)).then(() => {
-      navigate("teacher/courses");
+      navigate("/teacher/courses");
     });
   };
 

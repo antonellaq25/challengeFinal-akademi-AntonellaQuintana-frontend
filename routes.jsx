@@ -13,6 +13,7 @@ import CourseList from "./src/pages/CourseList";
 import TeacherGradesPage from "./src/pages/TeacherGradesPage";
 import CreateCoursePage from "./src/pages/CreateCoursePage";
 import EditCoursePage from "./src/pages/EditCoursePage";
+import UsersPage from "./src/pages/UsersPage";
 
 export default function AppRoutes({ user }) {
     console.log("usuarioactual", user)
@@ -70,6 +71,14 @@ export default function AppRoutes({ user }) {
                 element={
                     <ProtectedRoute user={user} allowedRoles={["superadmin"]}>
                         <AdminDashboardPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route
+                path="/users"
+                element={
+                    <ProtectedRoute user={user} allowedRoles={["superadmin"]}>
+                        <UsersPage user={user} />
                     </ProtectedRoute>
                 }
             />

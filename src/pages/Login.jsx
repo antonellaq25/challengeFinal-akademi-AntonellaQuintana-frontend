@@ -37,7 +37,7 @@ function Login() {
       if (user.role === "superadmin") {
         navigate("/admin");
       } else if (user.role === "teacher") {
-        navigate("/my-courses");
+        navigate("/teacher/courses");
       } else if (user.role === "student") {
         navigate("/courses");
       }

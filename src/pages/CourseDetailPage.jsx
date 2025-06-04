@@ -29,48 +29,49 @@ const CourseDetailPage = () => {
     }
   }, [dispatch, course, isAdmin, isOwnerTeacher]);
 
-  return (
-    <div className="flex justify-center items-start min-h-screen bg-green-50 px-4 pt-10">
-      <Card className="w-full max-w-3xl">
-        <CardBody>
-          {loading && <Spinner className="mx-auto" />}
-          {error && <Typography color="red">{error}</Typography>}
+ return (
+  <div className="flex justify-center items-start min-h-screen bg-gray-100 px-4 pt-10">
+    <Card className="w-full max-w-3xl">
+      <CardBody>
+        {loading && <Spinner className="mx-auto" />}
+        {error && <Typography color="red">{error}</Typography>}
 
-          {course && (
-            <>
-              <Typography variant="h4" className="mb-2">{course.title}</Typography>
-              <Typography>{course.description}</Typography>
-              <Typography>Category: {course.category}</Typography>
-              <Typography>Price: ${course.price}</Typography>
-              <Typography>Max. Students: {course.maxStudents}</Typography>
+        {course && (
+          <>
+            <Typography variant="h4" className="mb-2">{course.title}</Typography>
+            <Typography>{course.description}</Typography>
+            <Typography>Category: {course.category}</Typography>
+            <Typography>Price: ${course.price}</Typography>
+            <Typography>Max. Students: {course.maxStudents}</Typography>
 
-              {(isAdmin || isOwnerTeacher) && (
-                <>
-                  <Typography className="mt-4 font-medium text-blue-800">
-                   Enrolled students:{" "}
-                    {loadingEnrollments ? "Cargando..." : enrollments.length}
-                  </Typography>
+            {(isAdmin || isOwnerTeacher) && (
+              <>
+                <Typography className="mt-4 font-medium text-blue-800">
+                  Enrolled students:{" "}
+                  {loadingEnrollments ? "Cargando..." : enrollments.length}
+                </Typography>
 
-                  {enrollments.length > 0 && (
-                    <div className="mt-4">
-                      <Typography className="font-semibold">List of students:</Typography>
-                      <ul className="list-disc list-inside">
-                        {enrollments.map((enr) => (
-                          <li key={enr._id}>
-                            {enr.student?.name} ({enr.student?.email})
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </>
-              )}
-            </>
-          )}
-        </CardBody>
-      </Card>
-    </div>
-  );
+                {enrollments.length > 0 && (
+                  <div className="mt-4">
+                    <Typography className="font-semibold">List of students:</Typography>
+                    <ul className="list-disc list-inside">
+                      {enrollments.map((enr) => (
+                        <li key={enr._id}>
+                          {enr.student?.name} ({enr.student?.email})
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </>
+            )}
+          </>
+        )}
+      </CardBody>
+    </Card>
+  </div>
+);
+
 };
 
 export default CourseDetailPage;

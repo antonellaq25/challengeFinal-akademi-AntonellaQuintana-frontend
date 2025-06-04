@@ -5,8 +5,7 @@ import { courseReducer, courseDetailReducer } from "./reducers/courseReducer";
 import { userReducer } from "./reducers/userReducer";
 import { enrollmentReducer } from "./reducers/enrollmentReducer";
 import { gradeReducer } from './reducers/gradeReducer';
-
-
+import { statsReducer } from './reducers/statsReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -21,6 +20,7 @@ const rootReducer = combineReducers({
     enrollmentList: enrollmentReducer,
     courseDetail: courseDetailReducer,
     grade: gradeReducer,
+    stats:statsReducer
 });
 
 const store = createStore(

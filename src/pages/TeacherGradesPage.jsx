@@ -76,8 +76,6 @@ const TeacherGradesPage = () => {
 
   const isLoading = enrollmentsLoading || gradesLoading;
 
-	console.log(enrollments)
-
   const studentsWithoutGrade = enrollments.filter(
     (enr) => !gradedStudents.includes(enr.student._id)
   );

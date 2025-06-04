@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyCourses, deleteCourse } from "../../store/actions/courseActions";
 import { useNavigate } from "react-router-dom";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import NavbarPanel from "../components/NavBar";
+import { getMyCourses, deleteCourse } from "../../store/actions/courseActions";
 
 const TeacherPage = () => {
   const dispatch = useDispatch();
@@ -33,24 +33,23 @@ const TeacherPage = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-100 p-6">
       <NavbarPanel role={user?.role} />
 
-      <section className="min-h-screen bg-gray-100 px-4 py-10 flex flex-col items-center">
-        {user?.role === "teacher" && (
-          <div className="w-full max-w-5xl mb-6 flex justify-end">
+      <div className="max-w-5xl mx-auto mt-8">
+        <div className="flex justify-between items-center mb-6">
+          <Typography variant="h4" className="text-blue-gray-800 font-bold">
+            My Courses
+          </Typography>
+          {user?.role === "teacher" && (
             <Button color="green" onClick={handleCreate}>
               Create Course
             </Button>
-          </div>
-        )}
+          )}
+        </div>
 
-        <Card className="w-full max-w-5xl shadow-lg rounded-2xl">
-          <CardBody className="p-8">
-            <Typography variant="h3" color="blue-gray" className="text-center mb-8">
-              My Courses
-            </Typography>
-
+        <Card className="shadow-lg rounded-2xl">
+          <CardBody className="p-6">
             {loading && <Spinner className="mx-auto" color="blue" />}
 
             {error && (
@@ -65,28 +64,24 @@ const TeacherPage = () => {
                   <ul className="grid md:grid-cols-2 gap-6">
                     {courses.map(({ _id, title, description }) => (
                       <li key={_id}>
-                        <Card className="bg-white shadow-md hover:shadow-lg transition-all rounded-xl flex flex-col h-full">
-                          <CardBody className="flex flex-col gap-4 flex-grow">
-                            <Typography variant="h5" color="blue-gray">
+                        <Card className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all h-full">
+                          <CardBody className="flex flex-col gap-4 h-full">
+                            <Typography variant="h6" color="blue-gray">
                               {title}
                             </Typography>
                             <Typography color="gray" className="text-sm flex-grow">
                               {description}
                             </Typography>
-                            <div className="mt-auto flex justify-end gap-2">
+                            <div className="flex justify-end gap-2 mt-auto">
                               <Button size="sm" color="blue" onClick={() => handleDetail(_id)}>
-                                See more
+                                See More
                               </Button>
-                              {user?.role === "teacher" && (
-                                <>
-                                  <Button size="sm" color="amber" onClick={() => handleEdit(_id)}>
-                                    Edit
-                                  </Button>
-                                  <Button size="sm" color="red" onClick={() => handleDelete(_id)}>
-                                    Delete
-                                  </Button>
-                                </>
-                              )}
+                              <Button size="sm" color="amber" onClick={() => handleEdit(_id)}>
+                                Edit
+                              </Button>
+                              <Button size="sm" color="red" onClick={() => handleDelete(_id)}>
+                                Delete
+                              </Button>
                             </div>
                           </CardBody>
                         </Card>
@@ -102,8 +97,8 @@ const TeacherPage = () => {
             )}
           </CardBody>
         </Card>
-      </section>
-    </>
+      </div>
+    </div>
   );
 };
 

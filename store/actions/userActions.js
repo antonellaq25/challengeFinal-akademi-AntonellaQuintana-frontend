@@ -2,7 +2,10 @@ import axios from "axios";
 import {
 	USER_CREATE_REQUEST, USER_CREATE_SUCCESS, USER_CREATE_FAIL,
 	USER_UPDATE_REQUEST, USER_UPDATE_SUCCESS, USER_UPDATE_FAIL, USER_DELETE_REQUEST,
-	USER_DELETE_FAIL, GET_USER_SUCCESS, GET_USER_FAIL, GET_USER_REQUEST, USER_DELETE_SUCCESS
+	USER_DELETE_FAIL, GET_USER_SUCCESS, GET_USER_FAIL, GET_USER_REQUEST, USER_DELETE_SUCCESS,
+	USER_DETAILS_REQUEST,
+	USER_DETAILS_SUCCESS,
+	USER_DETAILS_FAIL,
 } from "../types/userTypes";
 
 const API_URL = "http://localhost:3000"
@@ -55,6 +58,30 @@ export const getUsers = (page = 1, limit = 5) => async (dispatch, getState) => {
 			type: GET_USER_FAIL,
 			payload:
 				error.response?.data?.message || error.message || "Error getting users",
+		});
+	}
+};
+export const getUserById = (id) => async (dispatch, getState) => {
+	try {
+		dispatch({ type: USER_DETAILS_REQUEST });
+		const {
+			auth: { token },
+		} = getState();
+		const config = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+		const { data } = await axios.get(`${API_URL}/users/${id}`, config);
+		dispatch({
+			type: USER_DETAILS_SUCCESS,
+			payload: data,
+		});
+	} catch (error) {
+		dispatch({
+			type: USER_DETAILS_FAIL,
+			payload:
+				error.response?.data?.message || error.message || "Error fetching user",
 		});
 	}
 };

@@ -24,116 +24,103 @@ const StatsPage = () => {
 			dispatch(getStats());
 		}
 	}, [dispatch, user, navigate]);
-	useEffect(() => {
-  console.log("Stats recibidas2:", stats);
-}, [stats]);
+
+	if (loading) {
+		return (
+			<div className="min-h-screen bg-red-50 flex items-center justify-center">
+				<Spinner className="h-8 w-8" />
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="min-h-screen bg-red-50 p-6">
+				<NavbarPanel role={user?.role} />
+				<div className="flex justify-center pt-20">
+					<Card className="w-full max-w-md">
+						<CardBody className="text-center">
+							<Typography color="red" variant="h6">
+								{error}
+							</Typography>
+						</CardBody>
+					</Card>
+				</div>
+			</div>
+		);
+	}
 
 	return (
-		<div className="min-h-screen bg-red-50 p-6 flex flex-col items-center">
+		<div className="min-h-screen bg-red-50">
 			<NavbarPanel role={user?.role} />
-			<div className="flex w-full justify-center items-start min-h-screen bg-red-50 px-4 pt-10">
-				<Card className="w-full max-w-5xl">
-					<CardBody>
-						<Typography variant="h4" className="mb-4">
-							User Statistics
-						</Typography>
-						{loading ? (
-							<Spinner className="mx-auto" />
-						) : error ? (
-							<Typography color="red">{error}</Typography>
-						) : (
-							<div className="space-y-8">
-								<div>
-									<Typography variant="h6">Total Users: {stats?.total}</Typography>
-								</div>
-								<div>
-									<Typography variant="h6" className="mb-2">Users by Role</Typography>
-									<table className="w-full min-w-max table-auto text-left">
-										<thead>
-											<tr>
-												<th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-													<Typography
-														variant="small"
-														color="blue-gray"
-														className="font-normal leading-none opacity-70"
-													>
-														Role
-													</Typography>
-												</th>
-												<th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-													<Typography
-														variant="small"
-														color="blue-gray"
-														className="font-normal leading-none opacity-70"
-													>
-														Count
-													</Typography>
-												</th>
-											</tr>
-										</thead>
-										<tbody>
-											{stats?.roles?.map((stat, index) => {
-												const isLast = index === stats.roles.length - 1;
-												const classes = isLast
-													? "p-4"
-													: "p-4 border-b border-blue-gray-50";
+			
+			<div className="container mx-auto px-4 py-8">
+				<Typography variant="h3" className="text-center mb-8 text-gray-800">
+					User Statistics
+				</Typography>
 
-												return (
-													<tr key={stat._id}>
-														<td className={classes}>{stat._id}</td>
-														<td className={classes}>{stat.count}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
-								<div>
-									<Typography variant="h6" className="mb-2">Users Registered per Month</Typography>
-									<table className="w-full min-w-max table-auto text-left">
-										<thead>
-											<tr>
-												<th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-													<Typography
-														variant="small"
-														color="blue-gray"
-														className="font-normal leading-none opacity-70"
-													>
-														Month
-													</Typography>
-												</th>
-												<th className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-													<Typography
-														variant="small"
-														color="blue-gray"
-														className="font-normal leading-none opacity-70"
-													>
-														Count
-													</Typography>
-												</th>
+				<div className="grid gap-6 max-w-4xl mx-auto">
+					<Card>
+						<CardBody className="text-center">
+							<Typography variant="h2" color="blue" className="mb-2">
+								{stats?.total || 0}
+							</Typography>
+							<Typography variant="h6" color="gray">
+								Total Users
+							</Typography>
+						</CardBody>
+					</Card>
+					<Card>
+						<CardBody>
+							<Typography variant="h5" className="mb-4 text-gray-800">
+								Users by Role
+							</Typography>
+							<div className="overflow-x-auto">
+								<table className="w-full">
+									<thead>
+										<tr className="border-b border-gray-200">
+											<th className="text-left py-3 px-4 font-semibold text-gray-700">Role</th>
+											<th className="text-right py-3 px-4 font-semibold text-gray-700">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										{stats?.roles?.map((stat, index) => (
+											<tr key={stat._id} className="border-b border-gray-100 last:border-0">
+												<td className="py-3 px-4 capitalize">{stat._id}</td>
+												<td className="py-3 px-4 text-right font-medium">{stat.count}</td>
 											</tr>
-										</thead>
-										<tbody>
-											{stats?.monthly?.map((stat, index) => {
-												const isLast = index === stats.monthly.length - 1;
-												const classes = isLast
-													? "p-4"
-													: "p-4 border-b border-blue-gray-50";
-
-												return (
-													<tr key={index}>
-														<td className={classes}>Month {stat._id}</td>
-														<td className={classes}>{stat.count}</td>
-													</tr>
-												);
-											})}
-										</tbody>
-									</table>
-								</div>
+										))}
+									</tbody>
+								</table>
 							</div>
-						)}
-					</CardBody>
-				</Card>
+						</CardBody>
+					</Card>
+					<Card>
+						<CardBody>
+							<Typography variant="h5" className="mb-4 text-gray-800">
+								Monthly Registrations
+							</Typography>
+							<div className="overflow-x-auto">
+								<table className="w-full">
+									<thead>
+										<tr className="border-b border-gray-200">
+											<th className="text-left py-3 px-4 font-semibold text-gray-700">Month</th>
+											<th className="text-right py-3 px-4 font-semibold text-gray-700">Count</th>
+										</tr>
+									</thead>
+									<tbody>
+										{stats?.monthly?.map((stat, index) => (
+											<tr key={index} className="border-b border-gray-100 last:border-0">
+												<td className="py-3 px-4">Month {stat._id}</td>
+												<td className="py-3 px-4 text-right font-medium">{stat.count}</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
+						</CardBody>
+					</Card>
+				</div>
 			</div>
 		</div>
 	);

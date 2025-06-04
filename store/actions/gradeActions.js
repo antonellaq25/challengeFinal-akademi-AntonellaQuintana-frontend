@@ -7,6 +7,7 @@ import {
   CREATE_GRADE_FAILURE,
   CREATE_GRADE_REQUEST,
 } from "../types/gradeTypes";
+const API_URL ="http://localhost:3000"
 
 export const getGradesByCourse = (courseId) => async (dispatch, getState) => {
   try {
@@ -18,13 +19,33 @@ export const getGradesByCourse = (courseId) => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${token}` },
     };
 
-    const { data } = await axios.get(`http://localhost:3000/grades/course/${courseId}`, config);
+    const { data } = await axios.get(`${API_URL}/grades/course/${courseId}`, config);
 
     dispatch({ type: GET_GRADES_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
       type: GET_GRADES_FAILURE,
       payload: error.response?.data?.message || "Error al obtener calificaciones",
+    });
+  }
+};
+export const getGradesByStudent = (courseId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: GET_GRADES_REQUEST });
+
+    const { auth: { token } } = getState();
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
+    const { data } = await axios.get(`${API_URL}/grades/student`, config);
+
+    dispatch({ type: GET_GRADES_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: GET_GRADES_FAILURE,
+      payload: error.response?.data?.message || "Error getting grades",
     });
   }
 };

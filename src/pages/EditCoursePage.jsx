@@ -60,7 +60,6 @@ const EditCoursePage = () => {
 			</div>
 		);
 	}
-
 	const formFields = [
 		{ label: "Title", name: "title" },
 		{ label: "Description", name: "description", isTextarea: true },
@@ -79,7 +78,6 @@ const EditCoursePage = () => {
 						</Typography>
 
 						{error && <Typography color="red">{error}</Typography>}
-
 						<form onSubmit={handleSubmit} className="space-y-4">
 							{formFields.map(({ label, name, type = "text", isTextarea }) =>
 								isTextarea ? (
@@ -103,7 +101,6 @@ const EditCoursePage = () => {
 									/>
 								)
 							)}
-
 							<div className="flex items-center space-x-2">
 								<input
 									type="checkbox"
@@ -114,7 +111,6 @@ const EditCoursePage = () => {
 								/>
 								<label htmlFor="active-checkbox">Active</label>
 							</div>
-
 							<Button type="submit" color="amber" disabled={loading}>
 								{loading ? "Updating..." : "Update Course"}
 							</Button>

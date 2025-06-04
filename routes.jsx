@@ -1,10 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-
 import ProtectedRoute from "./src/components/ProtectedRoutes";
 import Register from "./src/pages/Register"
 import Login from "./src/pages/Login"
-import CoursesPage from "./src/pages/CoursesPage";
 import TeacherPage from "./src/pages/TeacherPage";
 import AdminDashboardPage from "./src/pages/AdminDashboardPage";
 import NewUserPage from "./src/pages/NewUserPage"
@@ -15,6 +13,9 @@ import CreateCoursePage from "./src/pages/CreateCoursePage";
 import EditCoursePage from "./src/pages/EditCoursePage";
 import UsersPage from "./src/pages/UsersPage";
 import StatsPage from "./src/pages/StatsPages";
+import EditUserPage from "./src/pages/EditUserPage"
+import MyEnrollmentsPage from "./src/pages/MyEnrollmentsPage";
+import MyGradesPage from "./src/pages/MyGradesPage";
 
 export default function AppRoutes({ user }) {
 	console.log("usuarioactual", user)
@@ -33,10 +34,18 @@ export default function AppRoutes({ user }) {
 			<Route path="/login" element={<Login />} />
 
 			<Route
-				path="/student/my-courses"
+				path="/my-courses"
 				element={
-					<ProtectedRoute user={user} allowedRoles={["student"]}>
-						<CoursesPage />
+					<ProtectedRoute user={user} allowedRoles={["student", "superadmin"]}>
+						<MyEnrollmentsPage user={user} />
+					</ProtectedRoute>
+				}
+			/>
+			<Route
+				path="/my-grades"
+				element={
+					<ProtectedRoute user={user} allowedRoles={["student", "superadmin"]}>
+						<MyGradesPage user={user} />
 					</ProtectedRoute>
 				}
 			/>
@@ -79,7 +88,7 @@ export default function AppRoutes({ user }) {
 				path="/stats"
 				element={
 					<ProtectedRoute user={user} allowedRoles={["superadmin"]}>
-						<StatsPage/>
+						<StatsPage />
 					</ProtectedRoute>
 				}
 			/>
@@ -91,7 +100,14 @@ export default function AppRoutes({ user }) {
 					</ProtectedRoute>
 				}
 			/>
-
+			<Route
+				path="/admin/users/edit/:id"
+				element={
+					<ProtectedRoute user={user} allowedRoles={["superadmin"]}>
+						<EditUserPage user={user} />
+					</ProtectedRoute>
+				}
+			/>
 			<Route
 				path="/admin/new-user"
 				element={

@@ -18,7 +18,7 @@ import {
 } from "../types/courseTypes";
 const API_URL = "http://localhost:3000";
 
-export const getCourses = () => async (dispatch, getState) => {
+export const getCourses = (page = 1, limit = 5, filters = {}) => async (dispatch, getState) => {
     try {
         dispatch({ type: GET_COURSES_REQUEST });
 
@@ -31,13 +31,21 @@ export const getCourses = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${token}`,
             },
         };
+        const queryParams = new URLSearchParams({
+            page,
+            limit,
+            ...(filters.category && { category: filters.category }),
+            ...(filters.active && { active: filters.active }),
+            ...(filters.title && { title: filters.title}),
+        });
 
-        const { data } = await axios.get(`${API_URL}/courses`, config);
+        const { data } = await axios.get(`${API_URL}/courses?${queryParams.toString()}`, config);
         console.log("Cursos recibidos:", data);
 
         dispatch({
             type: GET_COURSES_SUCCESS,
-            payload: data.results,
+            payload: data.courses,
+            totalPages: data.totalPages,
         });
     } catch (error) {
         dispatch({

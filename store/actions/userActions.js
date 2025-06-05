@@ -33,9 +33,10 @@ export const createUser = (userData) => async (dispatch, getState) => {
 		});
 	}
 };
-export const getUsers = (page = 1, limit = 5) => async (dispatch, getState) => {
+export const getUsers = (page = 1, limit = 5, filters = {}) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: GET_USER_REQUEST });
+
 		const {
 			auth: { token },
 		} = getState();
@@ -45,22 +46,30 @@ export const getUsers = (page = 1, limit = 5) => async (dispatch, getState) => {
 				Authorization: `Bearer ${token}`,
 			},
 		};
-		const { data } = await axios.get(`${API_URL}/users?page=${page}&limit=${limit}`, config);
+		const queryParams = new URLSearchParams({
+			page,
+			limit,
+			...(filters.name && { name: filters.name }),
+			...(filters.email && { email: filters.email }),
+			...(filters.role && { role: filters.role }),
+		});
+
+		const { data } = await axios.get(`${API_URL}/users?${queryParams.toString()}`, config);
 		console.log("users recibidos:", data);
 
 		dispatch({
 			type: GET_USER_SUCCESS,
-			payload: data.results,
+			payload: data.users,
 			totalPages: data.totalPages,
 		});
 	} catch (error) {
 		dispatch({
 			type: GET_USER_FAIL,
-			payload:
-				error.response?.data?.message || error.message || "Error getting users",
+			payload: error.response?.data?.message || error.message || "Error getting users",
 		});
 	}
 };
+
 export const getUserById = (id) => async (dispatch, getState) => {
 	try {
 		dispatch({ type: USER_DETAILS_REQUEST });

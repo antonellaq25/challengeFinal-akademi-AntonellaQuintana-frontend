@@ -1,6 +1,5 @@
-import React from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import { Navbar, Typography } from "@material-tailwind/react";
+import { Navbar, Typography, Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../store/types/authTypes";
 
@@ -32,45 +31,52 @@ const NavbarPanel = ({ role }) => {
 		],
 	};
 
+	const roleInfo = {
+		superadmin: { title: "Admin Panel", color: "bg-red-500", icon: "👨‍💼" },
+		teacher: { title: "Teacher Panel", color: "bg-blue-500", icon: "👩‍🏫" },
+		student: { title: "Student Panel", color: "bg-green-500", icon: "👩‍🎓" },
+	};
+
 	const navItems = navConfig[role] || [];
+	const currentRole = roleInfo[role] || roleInfo.student;
 
 	return (
-		<Navbar className="mx-auto max-w-screen-xl p-4 mb-6">
-			<div className="container mx-auto flex items-center justify-between text-blue-gray-900">
-				<Typography
-					as="span"
-					variant="h5"
-					className="mr-4 cursor-pointer py-1.5 font-medium"
-				>
-					{role === "superadmin"
-						? "Admin Panel"
-						: role === "teacher"
-							? "Teacher Panel"
-							: "Student Panel"}
-				</Typography>
-
-				<ul className="flex gap-6 items-center">
+		<Navbar className="sticky top-0 z-10 shadow-md border-0 rounded-none bg-white/95 backdrop-blur-sm max-w-full">
+			<div className="flex items-center justify-between px-6 py-2 w-full">
+				<div className="flex items-center gap-3">
+					<div className={`w-8 h-8 ${currentRole.color} rounded-lg flex items-center justify-center text-white text-sm`}>
+						{currentRole.icon}
+					</div>
+					<Typography variant="h6" className="text-gray-800 font-semibold">
+						{currentRole.title}
+					</Typography>
+				</div>
+				<div className="hidden lg:flex items-center gap-1">
 					{navItems.map(({ label, to }) => (
-						<li key={to}>
-							<NavLink
-								to={to}
-								className={({ isActive }) =>
-									isActive ? "text-blue-500 font-bold" : "hover:text-blue-700"
-								}
-							>
-								{label}
-							</NavLink>
-						</li>
-					))}
-					<li>
-						<button
-							onClick={handleLogout}
-							className="text-red-500 hover:text-red-700 font-semibold"
+						<NavLink
+							key={to}
+							to={to}
+							className={({ isActive }) =>
+								`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
+									isActive
+										? "bg-blue-50 text-blue-600"
+										: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+								}`
+							}
 						>
-							Log out
-						</button>
-					</li>
-				</ul>
+							{label}
+						</NavLink>
+					))}
+					<Button
+						onClick={handleLogout}
+						variant="outlined"
+						size="sm"
+						className="ml-4 border-red-300 text-red-600 hover:bg-red-50 rounded-lg"
+					>
+						Logout
+					</Button>
+				</div>
+
 			</div>
 		</Navbar>
 	);

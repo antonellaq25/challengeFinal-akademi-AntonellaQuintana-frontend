@@ -20,6 +20,7 @@ const initialCourseListState = {
     loading: false,
     courses: [],
     error: null,
+    totalPages: 1,
 };
 
 export const courseReducer = (state = initialCourseListState, action) => {
@@ -31,7 +32,13 @@ export const courseReducer = (state = initialCourseListState, action) => {
             return { ...state, loading: true };
 
         case GET_COURSES_SUCCESS:
-            return { ...state, loading: false, courses: action.payload };
+            return {
+                ...state,
+                loading: false,
+                courses: action.payload || [],
+                totalPages: action.totalPages || 1,
+                error: null
+            };
 
         case CREATE_COURSE_SUCCESS:
             return {
@@ -71,6 +78,7 @@ const initialCourseDetailState = {
     loading: false,
     course: null,
     error: null,
+
 };
 
 export const courseDetailReducer = (state = initialCourseDetailState, action) => {

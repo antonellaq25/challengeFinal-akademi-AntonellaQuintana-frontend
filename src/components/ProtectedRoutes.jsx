@@ -6,7 +6,7 @@ const ProtectedRoute = ({ user, allowedRoles, children }) => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/login");
+      navigate("/");
     } else if (!allowedRoles.includes(user.role)) {
       navigate("/unauthorized"); 
     }

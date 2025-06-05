@@ -33,12 +33,17 @@ export const authReducer = (state = initialState, action) => {
             };
 
         case LOGIN_SUCCESS:
-        case REGISTER_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 user: action.payload.user,
                 token: action.payload.token,
+                error: null,
+            };
+        case REGISTER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
                 error: null,
             };
         case PASSWORD_RESET_SUCCESS:

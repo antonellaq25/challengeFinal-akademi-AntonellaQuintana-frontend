@@ -40,8 +40,7 @@ export const register = (userData, navigate) => async (dispatch) => {
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
-
-    navigate("/login"); 
+     navigate("/login");
 
   } catch (error) {
     dispatch({

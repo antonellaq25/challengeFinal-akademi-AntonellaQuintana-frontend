@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/actions/authActions";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import {
   Card,
   CardBody,
   Input,
   Button,
   Typography,
+  Alert,
 } from "@material-tailwind/react";
 
 function Login() {
@@ -49,38 +49,48 @@ function Login() {
       <Card className="w-full max-w-md">
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="mb-6 text-center">
-            Iniciar Sesión
+           Log In
           </Typography>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {error && (
+            <Alert color="red" className="mb-4">
+              {error}
+            </Alert>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              type="email"
               label="Email"
               name="email"
               value={email}
               onChange={handleChange}
               required
             />
-
             <Input
-              type="password"
-              label="Contraseña"
+              label="Password"
               name="password"
+              type="password"
               value={password}
               onChange={handleChange}
               required
-              minLength={6}
             />
-
-            <Button type="submit" disabled={loading} className="mt-4" fullWidth>
-              {loading ? "Iniciando sesión..." : "Ingresar"}
+            <div className="text-right">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-blue-600 hover:underline"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+            <Button
+              type="submit"
+              color="blue"
+              fullWidth
+              loading={loading}
+              disabled={loading}
+            >
+              Log In
             </Button>
-
-            {error && (
-              <Typography color="red" className="mt-2 text-center">
-                {error}
-              </Typography>
-            )}
           </form>
         </CardBody>
       </Card>

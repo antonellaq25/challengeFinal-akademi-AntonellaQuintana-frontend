@@ -16,12 +16,15 @@ import StatsPage from "./src/pages/StatsPages";
 import EditUserPage from "./src/pages/EditUserPage"
 import MyEnrollmentsPage from "./src/pages/MyEnrollmentsPage";
 import MyGradesPage from "./src/pages/MyGradesPage";
+import ForgotPassword from "./src/pages/ForgotPasswordPage";
+import ResetPassword from "./src/pages/ResetPasswordPage";
+import HomePage from "./src/pages/HomePage";
 
 export default function AppRoutes({ user }) {
 	console.log("usuarioactual", user)
 	return (
 		<Routes>
-
+			<Route path="/" element={<HomePage />} />
 			<Route
 				path="/courses"
 				element={
@@ -32,6 +35,8 @@ export default function AppRoutes({ user }) {
 			/>
 			<Route path="/register" element={<Register />} />
 			<Route path="/login" element={<Login />} />
+			<Route path="/forgot-password" element={<ForgotPassword />} />
+			<Route path="/reset-password/:token" element={<ResetPassword />} />
 
 			<Route
 				path="/my-courses"

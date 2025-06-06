@@ -20,7 +20,6 @@ const MyEnrollmentsPage = () => {
 	const { enrollments, loading, error } = useSelector(
 		(state) => state.enrollmentList
 	);
-
 	useEffect(() => {
 		dispatch(listStudentEnrollments());
 	}, [dispatch]);
@@ -30,7 +29,6 @@ const MyEnrollmentsPage = () => {
 			dispatch(deleteEnrollment(id));
 		}
 	};
-
 	return (
 		<div className="min-h-screen bg-red-50 p-6 flex flex-col items-center">
 			<NavbarPanel role={user?.role} />
@@ -44,13 +42,11 @@ const MyEnrollmentsPage = () => {
 						<Spinner className="h-12 w-12" color="blue" />
 					</div>
 				)}
-
 				{error && (
 					<Alert color="red" className="mb-4">
 						{error}
 					</Alert>
 				)}
-
 				<div className="grid grid-cols-1 justify-between md:grid-cols-2 gap-6">
 					{enrollments.map((enroll) =>
 						enroll.course ? (

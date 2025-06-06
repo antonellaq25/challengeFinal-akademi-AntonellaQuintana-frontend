@@ -68,7 +68,7 @@ const CourseList = ({ user }) => {
     setCurrentPage(1);
     setFilters(tempFilters);
   };
-  console.log("courses", courses)
+  console.log("courses", totalPages)
   return (
     <div className="min-h-screen bg-red-50 flex flex-col items-center">
       <NavbarPanel role={user?.role} />
@@ -141,7 +141,7 @@ const CourseList = ({ user }) => {
           )
         )}
       </div>
-      {totalPages > 1 && (
+       
         <div className="flex justify-center mt-8 gap-4">
           <Button
             variant="outlined"
@@ -161,7 +161,7 @@ const CourseList = ({ user }) => {
             Next
           </Button>
         </div>
-      )}
+      
       {alertOn && (
         <Alert color="green" className="mb-4" onClose={() => setAlertOn(false)}>
           You have successfully enrolled in the course!

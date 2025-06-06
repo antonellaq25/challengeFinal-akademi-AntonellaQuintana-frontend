@@ -16,7 +16,7 @@ import {
 
 const API_URL = "http://localhost:3000"
 
-export const getEnrollmentsByCourse = (courseId) => async (dispatch, getState) => {
+export const getEnrollmentsByCourse = (courseId, page = 1, limit = 5) => async (dispatch, getState) => {
     try {
         dispatch({ type: GET_ENROLLMENTS_REQUEST });
 
@@ -27,8 +27,10 @@ export const getEnrollmentsByCourse = (courseId) => async (dispatch, getState) =
         const config = {
             headers: { Authorization: `Bearer ${token}` },
         };
-
-        const { data } = await axios.get(`${API_URL}/enrollments/course/${courseId}`, config);
+        const { data } = await axios.get(
+            `${API_URL}/enrollments/course/${courseId}?page=${page}&limit=${limit}`, 
+            config
+        );
 
         dispatch({ type: GET_ENROLLMENTS_SUCCESS, payload: data });
     } catch (error) {
@@ -38,14 +40,12 @@ export const getEnrollmentsByCourse = (courseId) => async (dispatch, getState) =
         });
     }
 };
-
-
-export const listStudentEnrollments = () => async (dispatch, getState) => {
+export const listStudentEnrollments = ( page = 1, limit = 5) => async (dispatch, getState) => {
     try {
         dispatch({ type: ENROLLMENT_LIST_REQUEST });
         const { auth: { token } } = getState();
 
-        const { data } = await axios.get(`${API_URL}/enrollments/student`, {
+        const { data } = await axios.get(`${API_URL}/enrollments/student?page=${page}&limit=${limit}`, {
             headers: { Authorization: `Bearer ${token}` },
         });
 

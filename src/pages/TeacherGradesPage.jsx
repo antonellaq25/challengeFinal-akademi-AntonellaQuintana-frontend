@@ -189,5 +189,4 @@ const TeacherGradesPage = () => {
 		</div>
 	);
 };
-
 export default TeacherGradesPage;

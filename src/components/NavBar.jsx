@@ -1,4 +1,4 @@
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 import { Navbar, Typography, Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../store/types/authTypes";
@@ -37,8 +37,15 @@ const NavbarPanel = ({ role }) => {
 		student: { title: "Student Panel", color: "bg-green-500", icon: "👩‍🎓" },
 	};
 
+	const panelRoutes = {
+		superadmin: "/admin",
+		teacher: "/teacher/courses",
+		student: "/courses",
+	};
+
 	const navItems = navConfig[role] || [];
 	const currentRole = roleInfo[role] || roleInfo.student;
+	const panelRoute = panelRoutes[role] || "/";
 
 	return (
 		<Navbar className="sticky top-0 z-10 shadow-md border-0 rounded-none bg-white/95 backdrop-blur-sm max-w-full">
@@ -47,9 +54,11 @@ const NavbarPanel = ({ role }) => {
 					<div className={`w-8 h-8 ${currentRole.color} rounded-lg flex items-center justify-center text-white text-sm`}>
 						{currentRole.icon}
 					</div>
-					<Typography variant="h6" className="text-gray-800 font-semibold">
-						{currentRole.title}
-					</Typography>
+					<Link to={panelRoute}>
+						<Typography variant="h6" className="text-gray-800 font-semibold hover:underline">
+							{currentRole.title}
+						</Typography>
+					</Link>
 				</div>
 				<div className="hidden lg:flex items-center gap-1">
 					{navItems.map(({ label, to }) => (
@@ -57,10 +66,9 @@ const NavbarPanel = ({ role }) => {
 							key={to}
 							to={to}
 							className={({ isActive }) =>
-								`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-									isActive
-										? "bg-blue-50 text-blue-600"
-										: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+								`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${isActive
+									? "bg-blue-50 text-blue-600"
+									: "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
 								}`
 							}
 						>
@@ -76,10 +84,8 @@ const NavbarPanel = ({ role }) => {
 						Logout
 					</Button>
 				</div>
-
 			</div>
 		</Navbar>
 	);
 };
-
 export default NavbarPanel;

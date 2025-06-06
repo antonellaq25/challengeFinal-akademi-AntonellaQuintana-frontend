@@ -1,0 +1,930 @@
+{
+	"info": {
+		"_postman_id": "3eff0237-2e92-49d6-90ca-447c35dba32b",
+		"name": "Final Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29226974"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Update users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4MzYxMDQ0LCJleHAiOjE3NDg0NDc0NDR9.f-AXB25I5NQWRGxqcrFUrcdUdg6FrsfYORYS9pS_PhY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Antonella\",\n  \"email\": \"anto1@icloud.com\",\n  \"password\": \"supersecure1\"\n \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/68351da138bc180e279b33bb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"68351da138bc180e279b33bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4NjEzODI3LCJleHAiOjE3NDg3MDAyMjd9.uumbnJH4Gbr8BFoZzChImL_i5pncisE_19UOT-NU_MY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"\",\n  \"email\": \"teacher1teacher.com\",\n  \"password\": \"teacher1\",\n  \"role\": \"teacher\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4NjExOTEzLCJleHAiOjE3NDg2OTgzMTN9.PwV-FXZhGxAD3EyuBnu-LVAgPuV_t-3hyHEGodFKFMU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/683516620847204fa15376ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"683516620847204fa15376ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Reset Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE5N2Q5MmQzNzA3NjhmY2E3MDFlMjkiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY1MzYyMDMsImV4cCI6MTc0NjYyMjYwM30.Ltzd6HyI-tdxzFT8cgROSvzPsJ-k4RT3mVNSc92_d2M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\":\"quintana.antonella@icloud.com\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/forgot-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users by filter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4NTM1MDI5LCJleHAiOjE3NDg2MjE0Mjl9.lcP1c2RoQAlcCOKOJQyEMKnQUPQ3tIio8Zy5FPynyO0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/filter?role=superadmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "superadmin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4M2Y5MjgyMzY4YWUxMmM3ZWYxMjc1MiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4OTk2NzY1LCJleHAiOjE3NDkwODMxNjV9.nZ3uxmHNIEFnZBSxj3lLl0SUxjlrqg7zFoy7hjtG6pc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users?page=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users stats",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4NjEzODI3LCJleHAiOjE3NDg3MDAyMjd9.uumbnJH4Gbr8BFoZzChImL_i5pncisE_19UOT-NU_MY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/stats",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"asdqwe123\",\n  \"confirmPassword\": \"asdqwe123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYwM2UwMDliMDIzMmExYjZkMDI0YSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ4MzcwNDM2LCJleHAiOjE3NDg0NTY4MzZ9.E9_ieroPjmKFmHxujJNhLwKaxHi-Q5pNU7wbk8Ra9lM",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"reset-password",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYwM2UwMDliMDIzMmExYjZkMDI0YSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ4MzcwNDM2LCJleHAiOjE3NDg0NTY4MzZ9.E9_ieroPjmKFmHxujJNhLwKaxHi-Q5pNU7wbk8Ra9lM"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "create course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYxMTBlYjFmYWU1YmQ2M2RmYTJjMCIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ4NjExMDA5LCJleHAiOjE3NDg2OTc0MDl9.AKzfw-lhQF6yBIAsBS3tVbKvjOaf1R6uI29T1onqHe4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Photography\",\n  \"description\": \"Master Photography with photoshop \",\n  \"category\": \"design\",\n  \"price\": 50.00,\n  \"maxStudents\": 5\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get courses by filter",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4NDU1Nzg2LCJleHAiOjE3NDg1NDIxODZ9.2W4eaOs79wUTQkV678gegh3gAAyzNCNqBDDwPy8fzYM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/courses/filter?category=programming",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "programming"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get courses",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxNzE4OWJlYmViMWE2YTcyNzEyMyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ5MTUzMTk1LCJleHAiOjE3NDkyMzk1OTV9.cU_Z8_a5icQnVaUknjaiulixl2PBTOmHlmh4v-DJLLw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxZTU1YWUwZTNmNmM2M2ZjMGQzMiIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzQ4MzcxMDI3LCJleHAiOjE3NDg0NTc0Mjd9.VK-eVufhiFswbvxXqRYCdjv7TvaMsc1WnBhAk_5itwk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Curso de Node.js\",\n  \"description\": \"Aprende Node desde cero\",\n  \"category\": \"Backend\",\n  \"price\": 99.99,\n  \"maxStudents\": 50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/courses/6835fda1775ccca565bebf29",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"courses",
+								"6835fda1775ccca565bebf29"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enrollment",
+			"item": [
+				{
+					"name": "create enrollment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzliMmRjMTJiNTYxMjc5MDkwMDU1MSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ4NjEyOTcxLCJleHAiOjE3NDg2OTkzNzF9.8Rmd4bh8boW9hdlBsgwbUQbkwV8THZ3jn8SlxzCsoQk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"6839afcf3624c621eb454a00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enrollments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enrollments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get enrollment by student",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzliMjg5MTJiNTYxMjc5MDkwMDUzZSIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ4NjEyNDE0LCJleHAiOjE3NDg2OTg4MTR9.jo7S6ybYFoiCStBpmtrMYmekUNNrnhOcR-Jik4DrRuk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enrollments/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enrollments",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get enrollment by course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYxMTBlYjFmYWU1YmQ2M2RmYTJjMCIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ4ODk3MTEzLCJleHAiOjE3NDg5ODM1MTN9.15qrEWrjo4Q76M9gCGqIS4wz-gsj5A2nc1RdNfZ5ybU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enrollments/course/683613bdf58bd066ba060092",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enrollments",
+								"course",
+								"683613bdf58bd066ba060092"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete enrollment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxZDUxMzhiYzE4MGUyNzliMzNiNyIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ5MDY0OTQ4LCJleHAiOjE3NDkxNTEzNDh9.wDrQ9wyfcZfsA88PaUfsUgK2V5N-AZHDoF3kE3PPJ34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/enrollments/683e0a9f606bd744f45f4599",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"enrollments",
+								"683e0a9f606bd744f45f4599"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grades",
+			"item": [
+				{
+					"name": "create grade",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYxMTBlYjFmYWU1YmQ2M2RmYTJjMCIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5MjE3Mjc5LCJleHAiOjE3NDkzMDM2Nzl9.xR_t48t_58Vo3ZY_hX7Eoyj9SCJX4bdjbPLfscst9oI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"studentId\": \"6839b28912b561279090053e\",\n  \"courseId\": \"6839afcf3624c621eb454a00\",\n  \"score\": 9,\n  \"feedback\": \"Good job!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/grades",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"grades"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get grades by student",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NDI0N2QxMDg5ZTY3YWY4Yzg1MzJjOCIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ5MjE1NTYzLCJleHAiOjE3NDkzMDE5NjN9.nIT0OZHLiS3aadT6vVQLfA4VeFgBkNIzn8qZJNNMDEw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/grades/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"grades",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get grades by student Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzUxZDUxMzhiYzE4MGUyNzliMzNiNyIsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzQ5MDY3MzE1LCJleHAiOjE3NDkxNTM3MTV9.wMSG6HIHjJX0W_X6qeAMvVIoVWxQtHght4PwsrWMChI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/grades/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"grades",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update grade",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYxMTBlYjFmYWU1YmQ2M2RmYTJjMCIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ5MjE3Mjc5LCJleHAiOjE3NDkzMDM2Nzl9.xR_t48t_58Vo3ZY_hX7Eoyj9SCJX4bdjbPLfscst9oI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"studentId\": \"684247d1089e67af8c8532c8\",\n  \"courseId\": \"683f3a7edba05588fd0dc680\",\n  \"score\": 8,\n  \"feedback\": \"Good job!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/grades/68424e570ef74cf036544ef1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"grades",
+								"68424e570ef74cf036544ef1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE5N2RiNWQzNzA3NjhmY2E3MDFlMmMiLCJyb2xlIjoiZGVzayIsImlhdCI6MTc0NjUwMTYwMCwiZXhwIjoxNzQ2NTg4MDAwfQ.d6e3n8YDbbKmA_qjRVAw3todR2KmkFgSZ_GmqOQFlVY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"student@student.com\",\n  \"email\": \"newstudent3@gmail.com\",\n  \"password\": \"secret\"\n  \n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4MzYxMTBlYjFmYWU1YmQ2M2RmYTJjMCIsInJvbGUiOiJ0ZWFjaGVyIiwiaWF0IjoxNzQ4ODk2MzEzLCJleHAiOjE3NDg5ODI3MTN9.Y-q7BcsJJeJb6GrEfk-xiOnd3-8aOUCWUnx7dJQaO-k",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@admin.com\",\n  \"password\": \"secret1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyCourses } from "../../store/actions/courseActions";
-import { createGrade, getGradesByCourse } from "../../store/actions/gradeActions";
+import { createGrade, updateGrade, getGradesByCourse } from "../../store/actions/gradeActions";
 import { getEnrollmentsByCourse } from "../../store/actions/enrollmentActions";
 import NavbarPanel from "../components/NavBar";
 import {
@@ -20,7 +20,6 @@ const TeacherGradesPage = () => {
 
 	const [selectedCourse, setSelectedCourse] = useState("");
 	const [newGrades, setNewGrades] = useState({});
-	const [gradedStudents, setGradedStudents] = useState([]);
 	const [successMessage, setSuccessMessage] = useState("");
 
 	useEffect(() => {
@@ -34,13 +33,6 @@ const TeacherGradesPage = () => {
 		}
 	}, [selectedCourse, dispatch]);
 
-	useEffect(() => {
-		const ids = grades.map(g =>
-			typeof g.studentId === "object" ? g.studentId._id : g.studentId
-		);
-		setGradedStudents(ids);
-	}, [grades]);
-
 	const handleGradeChange = (studentId, value) => {
 		setNewGrades(prev => ({ ...prev, [studentId]: value }));
 	};
@@ -52,18 +44,31 @@ const TeacherGradesPage = () => {
 			return;
 		}
 
+		const existingGrade = grades.find(g =>
+			(g.studentId._id || g.studentId) === studentId
+		);
+
 		try {
-			await dispatch(createGrade({ studentId, courseId: selectedCourse, score }));
-			setGradedStudents(prev => [...prev, studentId]);
-			setSuccessMessage("Grade saved successfully!");
+			if (existingGrade) {
+				await dispatch(updateGrade(existingGrade._id, score));
+
+				setSuccessMessage("Grade updated successfully!");
+			} else {
+				await dispatch(createGrade({ studentId, courseId: selectedCourse, score }));
+				setSuccessMessage("Grade saved successfully!");
+			}
+
 			setNewGrades(prev => {
 				const copy = { ...prev };
 				delete copy[studentId];
 				return copy;
 			});
+
+			dispatch(getGradesByCourse(selectedCourse));
+
 			setTimeout(() => setSuccessMessage(""), 3000);
-		} catch {
-			alert("Error saving grade.");
+		} catch (error) {
+			alert("Error saving/updating grade.");
 		}
 	};
 
@@ -75,15 +80,19 @@ const TeacherGradesPage = () => {
 	};
 
 	const isLoading = enrollmentsLoading || gradesLoading;
-	console.log("enrollment", enrollments)
+
+	const gradedStudentIds = grades.map(g =>
+		typeof g.studentId === "object" ? g.studentId._id : g.studentId
+	);
+
 	const studentsWithoutGrade = enrollments.filter(
-		(enr) => !gradedStudents.includes(enr.student._id)
+		(enr) => !gradedStudentIds.includes(enr.student._id)
 	);
 
 	const studentsWithGrade = enrollments.filter(
-		(enr) => gradedStudents.includes(enr.student._id)
+		(enr) => gradedStudentIds.includes(enr.student._id)
 	);
-	console.log("grades", grades)
+
 	return (
 		<div className="min-h-screen bg-blue-gray-50 flex flex-col items-center">
 			<NavbarPanel role={user?.role} />
@@ -123,6 +132,8 @@ const TeacherGradesPage = () => {
 									<Input
 										label="New grade"
 										type="number"
+										required
+										min={1}
 										value={newGrades[student._id] || ""}
 										onChange={(e) => handleGradeChange(student._id, e.target.value)}
 									/>
@@ -136,16 +147,29 @@ const TeacherGradesPage = () => {
 
 					{!isLoading && studentsWithGrade.length > 0 && (
 						<div className="mt-8">
-							<Typography variant="h5" className="mb-4 text-center">Already Graded Students</Typography>
+							<Typography variant="h5" className="mb-4 text-center">Graded Students</Typography>
 							{studentsWithGrade.map(({ _id, student }) => (
 								<Card key={_id} className="mb-4 bg-green-50 shadow-sm">
 									<CardBody>
 										{student ? (
 											<>
 												<Typography variant="h6">Student: {student.name}</Typography>
-												<Typography color="green" className="font-semibold">
-													Final Grade: {getStudentGrade(student._id)}
+												<Typography color="green" className="font-semibold mb-2">
+													Current Grade: {getStudentGrade(student._id)}
 												</Typography>
+												<div className="flex items-center gap-4">
+													<Input
+														label="Update grade"
+														type="number"
+														required
+														min={1}
+														value={newGrades[student._id] || ""}
+														onChange={(e) => handleGradeChange(student._id, e.target.value)}
+													/>
+													<Button color="green" onClick={() => handleSubmit(student._id)}>
+														Update
+													</Button>
+												</div>
 											</>
 										) : (
 											<>
@@ -160,7 +184,6 @@ const TeacherGradesPage = () => {
 							))}
 						</div>
 					)}
-
 				</CardBody>
 			</Card>
 		</div>

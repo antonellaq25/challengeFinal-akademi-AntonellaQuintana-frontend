@@ -29,13 +29,6 @@ const CreateCoursePage = () => {
 		e.preventDefault();
 
 		const maxStudentsNum = Number(maxStudents);
-		if (
-			!Number.isInteger(maxStudentsNum) ||
-			maxStudentsNum <= 0
-		) {
-			alert("Max students must be a positive integer");
-			return;
-		}
 
 		const newCourse = {
 			title,
@@ -95,10 +88,7 @@ const CreateCoursePage = () => {
 								value={maxStudents}
 								onChange={(e) => {
 									const val = e.target.value;
-
-									if (val === "" || /^[0-9\b]+$/.test(val)) {
-										setMaxStudents(val);
-									}
+									setMaxStudents(val);
 								}}
 								required
 								min={1}

@@ -49,7 +49,7 @@ function Login() {
       <Card className="w-full max-w-md">
         <CardBody>
           <Typography variant="h4" color="blue-gray" className="mb-6 text-center">
-           Log In
+            Log In
           </Typography>
 
           {error && (

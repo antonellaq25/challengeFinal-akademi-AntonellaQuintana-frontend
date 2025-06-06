@@ -30,7 +30,7 @@ const MyEnrollmentsPage = () => {
 		}
 	};
 	return (
-		<div className="min-h-screen bg-red-50 p-6 flex flex-col items-center">
+		<div className="min-h-screen bg-red-50 flex flex-col items-center">
 			<NavbarPanel role={user?.role} />
 			<div className="p-6 max-w-5xl mx-auto">
 				<Typography variant="h3" color="blue-gray" className="mb-6">

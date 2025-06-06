@@ -12,8 +12,6 @@ import {
   Spinner,
   Alert,
   Input,
-  Select,
-  Option,
 } from "@material-tailwind/react";
 
 const CourseList = ({ user }) => {
@@ -68,7 +66,7 @@ const CourseList = ({ user }) => {
     setCurrentPage(1);
     setFilters(tempFilters);
   };
-  console.log("courses", totalPages)
+
   return (
     <div className="min-h-screen bg-red-50 flex flex-col items-center">
       <NavbarPanel role={user?.role} />
@@ -141,27 +139,27 @@ const CourseList = ({ user }) => {
           )
         )}
       </div>
-       
-        <div className="flex justify-center mt-8 gap-4">
-          <Button
-            variant="outlined"
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage((p) => p - 1)}
-          >
-            Previous
-          </Button>
-          <Typography className="self-center">
-            Page {currentPage} of {totalPages}
-          </Typography>
-          <Button
-            variant="outlined"
-            disabled={currentPage === totalPages}
-            onClick={() => setCurrentPage((p) => p + 1)}
-          >
-            Next
-          </Button>
-        </div>
-      
+
+      <div className="flex justify-center mt-8 gap-4">
+        <Button
+          variant="outlined"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((p) => p - 1)}
+        >
+          Previous
+        </Button>
+        <Typography className="self-center">
+          Page {currentPage} of {totalPages}
+        </Typography>
+        <Button
+          variant="outlined"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((p) => p + 1)}
+        >
+          Next
+        </Button>
+      </div>
+
       {alertOn && (
         <Alert color="green" className="mb-4" onClose={() => setAlertOn(false)}>
           You have successfully enrolled in the course!
